@@ -1,0 +1,369 @@
+:root {
+  --very-light-grayish-blue: hsl(240deg 78% 98%);
+  --light-grayish-blue: hsl(234deg 14% 74%);
+  --grayish-blue: hsl(233deg 13% 49%);
+  --grayish-blue-light: hsl(233deg 13% 49% / 25%);
+  --dark-grayish-blue: hsl(232deg 13% 33%);
+  --soft-blue: hsl(237deg 63% 64%);
+  --primary-gradient: linear-gradient(
+    135deg,
+    hsl(236deg 72% 79%) 0%,
+    var(--soft-blue) 100%
+  );
+  --white: hsl(0deg 0% 100%);
+  --white-light: hsl(0deg 0% 100% / 25%);
+  --primary-transition: 200ms ease-in-out;
+}
+
+@font-face {
+  font-style: normal;
+  font-weight: 700;
+  src: local("Montserrat"), local("Montserrat Bold"), local("Montserrat-Bold"),
+    url("/fonts/Montserrat-Bold.woff2") format("woff2");
+  font-family: Montserrat;
+  font-display: swap;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-delay: -1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-delay: 0s !important;
+    transition-duration: 0s !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+  }
+}
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  background-repeat: no-repeat;
+  padding: 0;
+}
+
+:focus {
+  outline: 0.1875rem solid var(--soft-blue);
+  outline-offset: 0.3125rem;
+}
+
+body {
+  background-image: url("/svg/bg-top.svg"), url("/svg/bg-bottom.svg");
+  background-position: top right, bottom left;
+  background-color: var(--very-light-grayish-blue);
+  padding-top: 4.4375rem;
+  padding-bottom: 4.4375rem;
+  min-height: 100vh;
+  color: var(--dark-grayish-blue);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  font-family: Montserrat, sans-serif;
+  text-rendering: optimizeSpeed;
+}
+
+input,
+button {
+  font: inherit;
+}
+
+fieldset {
+  border: 0;
+  white-space: nowrap;
+}
+
+button[type] {
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.display\:block {
+  display: block;
+}
+
+.pricing {
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+  max-width: 68.75rem;
+}
+
+.pricing__title {
+  margin-bottom: 2.5rem;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.pricing__container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 4rem;
+}
+@media screen and (min-width: 63.125rem) {
+  .pricing__container {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.toggle-pricing {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 15rem;
+}
+
+/**
+ * 1. Center the "Our Pricing" text on Firefox
+ */
+.toggle-pricing__legend {
+  margin-right: auto; /* 1 */
+  margin-bottom: 2.5rem;
+  margin-left: auto; /* 1 */
+  text-align: center;
+}
+
+.toggle-pricing__label {
+  display: inline-block;
+  position: relative;
+  z-index: 2;
+  line-height: 2;
+}
+
+.toggle-pricing__label--inline-start {
+  padding-right: 5em;
+}
+
+.toggle-pricing__label--inline-end {
+  margin-left: -3.5rem;
+  padding-left: 5em;
+}
+
+.toggle-pricing__label--inline-start::before,
+.toggle-pricing__label--inline-start::after {
+  position: absolute;
+  vertical-align: middle;
+  height: 2rem;
+  overflow: hidden;
+  content: "";
+}
+
+/* Wrapper */
+.toggle-pricing__label--inline-start::after {
+  margin: 0 1.5rem;
+  border-radius: 2em;
+  background-image: var(--primary-gradient);
+  width: 3.5rem;
+}
+
+/* Circle */
+.toggle-pricing__label--inline-start::before {
+  position: absolute;
+  top: 0.25rem;
+  right: -0.075em;
+  transform: translateX(0);
+  z-index: 2;
+  border-radius: 50%;
+  background-color: var(--white);
+  width: 1.5rem;
+  height: 1.5rem;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .toggle-pricing__label--inline-start::before {
+    transition: transform var(--primary-transition);
+  }
+}
+
+/* Visually hide the radio input */
+.toggle-pricing__radio {
+  position: absolute;
+  opacity: 0;
+}
+
+.toggle-pricing__radio--annually:checked
+  ~ .toggle-pricing__label--inline-start::before {
+  transform: translateX(-1.5rem);
+}
+
+.toggle-pricing__radio--monthly:checked ~ .toggle-pricing__label--inline-end {
+  z-index: 1;
+}
+
+.toggle-pricing:focus-within .toggle-pricing__label--inline-start::after {
+  box-shadow: 0 0 0 0.15rem var(--very-light-grayish-blue),
+    0 0 0 0.3rem var(--soft-blue);
+}
+
+.card {
+  margin-right: auto;
+  margin-left: auto;
+  box-shadow: 0 1.25rem 2.5rem rgba(212, 210, 244, 0.5);
+  border-radius: 0.625rem;
+  background-color: var(--white);
+  padding: 2rem;
+  width: 100%;
+  max-width: 40rem;
+  line-height: 1.86;
+  text-align: center;
+}
+
+.card + .card {
+  margin-top: 2rem;
+}
+@media screen and (min-width: 63.125rem) {
+  .card + .card {
+    margin-top: 0;
+  }
+}
+
+.card--highlight {
+  background-image: var(--primary-gradient);
+  padding-top: 3.4375rem;
+  padding-bottom: 3.4375rem;
+  color: var(--white);
+}
+
+.card__title {
+  margin-bottom: 1.5rem;
+  font-size: 1.125rem;
+}
+
+.card__monthly-price,
+.card__annually-price {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card__price {
+  font-size: 4.5rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.card__dollar-sign {
+  font-size: 2.5rem;
+}
+
+.card__price-description {
+  font-size: 0.9375rem;
+  letter-spacing: initial;
+}
+
+.card__list {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.card__item {
+  border-top: 0.0625rem solid var(--grayish-blue-light);
+  padding-top: 0.8125rem;
+  padding-bottom: 0.8125rem;
+}
+
+.card__item:last-child {
+  border-bottom: 0.0625rem solid var(--grayish-blue-light);
+}
+
+.card--highlight .card__item {
+  border-color: var(--white-light);
+}
+
+.button {
+  display: block;
+  border-radius: 0.375rem;
+  padding: 0.875rem;
+  font-size: 0.8125rem;
+  letter-spacing: 0.1em;
+  text-decoration-color: transparent;
+  text-transform: uppercase;
+}
+
+.button--primary-gradient {
+  border: 0.0625rem solid hsl(237deg, 63%, 65%);
+  background-image: var(--primary-gradient);
+  color: var(--white);
+}
+@media (hover: none) {
+  .button--primary-gradient {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+  .button--primary-gradient:active {
+    background-image: none;
+    color: inherit;
+  }
+}
+@media (-ms-high-contrast: none),
+  (-ms-high-contrast: active),
+  (-moz-touch-enabled: 0),
+  (hover: hover) {
+  .button--primary-gradient:hover {
+    background-image: none;
+    color: inherit;
+  }
+}
+
+.button--white:focus {
+  outline-color: var(--white);
+}
+
+.button--white {
+  border: 0.0625rem solid var(--white);
+  background-color: var(--white);
+  color: var(--soft-blue);
+}
+@media (hover: none) {
+  .button--white {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+  .button--white:active {
+    background-color: transparent;
+    color: inherit;
+  }
+}
+@media (-ms-high-contrast: none),
+  (-ms-high-contrast: active),
+  (-moz-touch-enabled: 0),
+  (hover: hover) {
+  .button--white:hover {
+    background-color: transparent;
+    color: inherit;
+  }
+}
+
+.attribution {
+  margin-top: 5rem;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 60ch;
+  text-align: center;
+}
+
+.attribution__link {
+  color: inherit;
+  text-underline-offset: 0.3em;
+}
+
+.bonus__annually-price {
+  display: none;
+}
+
+.bonus:has(.toggle-pricing__radio--annually:checked) .bonus__annually-price {
+  display: flex;
+}
+
+.bonus:has(.toggle-pricing__radio--annually:checked) .bonus__monthly-price {
+  display: none;
+}
